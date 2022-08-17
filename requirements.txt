@@ -1,1 +1,6 @@
-py-cord~=2.0.0
+py-cord~=2.0.1
+python-dotenv~=0.20.0
+pymongo~=4.2.0
+motor~=3.0.0
+jishaku~=2.5.1
+psutil~=5.9.1
