@@ -20,6 +20,14 @@ class Utils(commands.Cog):
 
         await ctx.send(embed=embed)
 
+    @commands.slash_command()
+    async def reaction_roles(self, ctx: ApplicationContext):
+        return
+
+
+
+    #@commands.command()
+    #async def set
 
 def setup(bot):
     bot.add_cog(Utils(bot))
