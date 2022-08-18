@@ -75,7 +75,6 @@ class Staff(commands.Cog):
                 embed = discord.Embed(color=0xff0000)
                 embed.add_field(name='Banned ⚠️', value=f'{member} has been banned: `{reason}`')
                 await ctx.send(embed=embed)
-                ctx.message.guild.id
             else:
                 await ctx.channel.send("Ban failed - You can't ban someone with hightened permissions")
         except commands.MissingRole:
@@ -160,6 +159,22 @@ class Staff(commands.Cog):
         await ctx.channel.purge(limit=limit + 1, check=check)
         await ctx.send(f"Successfully purged {limit} messages!",
                        delete_after=2)
+
+    @commands.command()
+    @commands.has_any_role(978313566274854922, 978313704917581824, 978431363881525248)
+    async def unban(self, ctx, member: discord.User):
+        try:
+            if member is None:
+                await ctx.channel.send("Please provide a user to unban!")
+                return
+
+            await ctx.guild.unban(member, reason=f"mod: {ctx.author}")
+            embed = discord.Embed(color=0xff0000)
+            embed.add_field(name='Unban', value=f'{member} has been unbanned')
+            await ctx.send(embed=embed)
+
+        except commands.MissingRole:
+            await ctx.channel.send("Unban failed - You're missing permissions")
 
 
 def setup(bot):
