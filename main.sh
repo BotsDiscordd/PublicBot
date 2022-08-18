@@ -1,3 +1,6 @@
+python3.8 -m venv python_env
+source python_env/bin/activate
+
 pip3 install --upgrade pip && pip3 install requests
 pip3 install -r requirements.txt
 pip3 install --upgrade --no-deps --force-reinstall git+https://github.com/Pycord-Development/pycord
