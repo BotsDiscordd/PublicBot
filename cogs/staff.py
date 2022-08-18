@@ -80,6 +80,22 @@ class Staff(commands.Cog):
                 await ctx.channel.send("Ban failed - You can't ban someone with hightened permissions")
         except commands.MissingRole:
             await ctx.channel.send("Ban failed - You're missing permissions")
+            
+    @commands.command()
+    @commands.has_any_role("Cookie Queen", "Administrator Cookie", "Moderator Cookie")
+    async def ban(self, ctx, member: discord.User):
+        try:
+              if member is None:
+                  await ctx.channel.send("Please provide a user to ban!")
+                  return
+
+              await ctx.guild.ban(member, reason=f"mod: {ctx.author}")
+              embed = discord.Embed(color=0xff0000)
+              embed.add_field(name='Unban ⚠️', value=f'{member} has been unbanned: `{reason}`')
+              await ctx.send(embed=embed)
+              ctx.message.guild.id
+        except commands.MissingRole:
+            await ctx.channel.send("Unban failed - You're missing permissions")
 
     @commands.slash_command()
     @discord.default_permissions(manage_roles=True)
