@@ -1,5 +1,6 @@
 import json
 import os
+import traceback
 
 import discord
 from discord.ext import commands
@@ -74,6 +75,14 @@ async def on_command_error(ctx, error: Exception):
         return await ctx.channel.send(embed=embed)
     if isinstance(error, commands.BotMissingPermissions):
         embed = discord.Embed(title="Bot Missing Permissions", description=f"{error}")
+        return await ctx.send(embed=embed)
+    else:
+        report = bot.get_guild(816041318119505991).get_channel(816041318119505991)
+        embed = discord.Embed(title='An Error has occurred', description=f'Error: \n `{error}`',
+                              timestamp=ctx.message.created_at, color=discord.Color.nitro_pink())
+        await report.send(embed=embed)
+        print(error)
+        print(f"EXCEPTION TRACE PRINT:\n{''.join(traceback.format_exception(type(error), error, error.__traceback__))}")
 
 
 @bot.command()
