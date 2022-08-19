@@ -60,7 +60,7 @@ async def on_ready():
         if guild_check is None:
             await guild_coll.insert_one({"Guild": int(guild.id),
                                          "prefix": "p!",
-                                         "staff_roles": [],
+                                         "reaction_roles": [],
                                          "ModLogs": 0})
     await bot.change_presence(status=discord.Status.do_not_disturb,
                               activity=discord.Activity(type=discord.ActivityType.watching, name=f"Cookies bake"))

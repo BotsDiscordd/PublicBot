@@ -186,7 +186,7 @@ class Staff(commands.Cog):
         await ctx.defer()
         data = await guild_coll.find_one({"Guild": int(ctx.guild_id)})
         if data['reaction_roles'] is None:
-            await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"reaction_roles": [role.id]}})
+            await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"reaction_roles": []}})
         await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$push": {"reaction_roles": role.id}})
         await ctx.respond(f"Added {role.name} to the list of reaction roles.\n Current roles {data['reaction_roles']}")
 
