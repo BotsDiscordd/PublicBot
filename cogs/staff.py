@@ -183,6 +183,7 @@ class Staff(commands.Cog):
 
     @reactions.command()
     async def add(self, ctx: ApplicationContext, role: typing.Optional[discord.Role]):
+        await ctx.defer()
         data = await guild_coll.find_one({"Guild": int(ctx.guild_id)})
         if data['reaction_roles'] is None:
             await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"reaction_roles": [role.id]}})
