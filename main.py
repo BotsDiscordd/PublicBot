@@ -77,7 +77,7 @@ async def on_command_error(ctx, error: Exception):
         embed = discord.Embed(title="Bot Missing Permissions", description=f"{error}")
         return await ctx.send(embed=embed)
     else:
-        report = bot.get_guild(816041318119505991).get_channel(816041318119505991)
+        report = bot.get_guild(996196908370493593).get_channel(1002743711790268457)
         embed = discord.Embed(title='An Error has occurred', description=f'Error: \n `{error}`',
                               timestamp=ctx.message.created_at, color=discord.Color.nitro_pink())
         await report.send(embed=embed)

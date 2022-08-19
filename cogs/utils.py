@@ -30,7 +30,7 @@ class Utils(commands.Cog):
         embed = discord.Embed(description=arg)
         embed.set_author(icon_url=ctx.author.avatar.url, name=f"{ctx.author.name}#{ctx.author.discriminator}")
         message = await suggestion_channel.send(embed=embed)
-        await ctx.channel.create_thread(name=arg, message=message, auto_archive_duration=10080)
+        await ctx.channel.create_thread(name=arg, message=message.id, auto_archive_duration=10080)
 
 
 
