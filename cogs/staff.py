@@ -176,6 +176,20 @@ class Staff(commands.Cog):
         except commands.MissingRole:
             await ctx.channel.send("Unban failed - You're missing permissions")
 
+    reactions = discord.SlashCommandGroup(
+        "reactions",
+        "setup reaction roles for your server", default_member_permissions=discord.Permissions(manage_roles=True)
+    )
+
+    @reactions.command()
+    async def add(self, ctx: ApplicationContext, role: typing.Optional[discord.Role]):
+        data = await guild_coll.find_one({"Guild": int(ctx.guild_id)})
+        if data['reaction_roles'] is None:
+            await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"reaction_roles": [role.id]}})
+        await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$push": {"reaction_roles": role.id}})
+        await ctx.respond(f"Added {role.name} to the list of reaction roles.\n Current roles {data['reaction_roles']}")
+
+
 
 def setup(bot):
     bot.add_cog(Staff(bot))
