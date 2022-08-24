@@ -50,11 +50,11 @@ class TicketButton(discord.ui.View):
                 interaction.guild.default_role: discord.PermissionOverwrite(
                     read_messages=False),
                 interaction.guild.get_role(
-                    867023276882657300): discord.PermissionOverwrite(
+                    978341531868094475): discord.PermissionOverwrite(
                     read_messages=True,
                     send_messages=True),
                 interaction.guild.get_role(
-                    986382534961147964): discord.PermissionOverwrite(
+                    978431363881525248): discord.PermissionOverwrite(
                     read_messages=True,
                     send_messages=True),
                 interaction.user: discord.PermissionOverwrite(
@@ -83,11 +83,11 @@ class TicketButton(discord.ui.View):
                 interaction.guild.default_role: discord.PermissionOverwrite(
                     read_messages=False),
                 interaction.guild.get_role(
-                    867023276882657300): discord.PermissionOverwrite(
+                    978341531868094475): discord.PermissionOverwrite(
                     read_messages=True,
                     send_messages=True),
                 interaction.guild.get_role(
-                    986382534961147964): discord.PermissionOverwrite(
+                    978431363881525248): discord.PermissionOverwrite(
                     read_messages=True,
                     send_messages=True),
                 interaction.user: discord.PermissionOverwrite(
