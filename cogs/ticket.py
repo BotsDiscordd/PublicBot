@@ -43,7 +43,7 @@ class TicketButton(discord.ui.View):
         guild = await guild_coll.find_one({"Guild": interaction.guild.id})
         logs = self.bot.get_channel(guild['Ticket_Cat'])
         guild_get = interaction.client.get_guild(guild)
-        ticket_cat = discord.utils.get(guild_get.categories, name="Tickets")
+        ticket_cat = discord.utils.get(guild_get.categories, name=logs)
         ticket_channel = await ticket_cat.create_text_channel(
             name=f"{interaction.user.name} - {interaction.user.discriminator}",
             overwrites={
@@ -76,7 +76,7 @@ class TicketButton(discord.ui.View):
         guild = await guild_coll.find_one({"Guild": interaction.guild.id})
         logs = self.bot.get_channel(guild['Ticket_Cat'])
         guild_get = interaction.client.get_guild(guild)
-        ticket_cat = discord.utils.get(guild_get.categories, name="Tickets")
+        ticket_cat = discord.utils.get(guild_get.categories, name=logs)
         ticket_channel = await ticket_cat.create_text_channel(
             name=f"{interaction.user.name} - {interaction.user.discriminator}",
             overwrites={
@@ -165,7 +165,7 @@ class AdminCommands(commands.Cog):
         logs = await guild_coll.find_one({"Guild": int(ctx.guild_id)})
         if logs is None:
             return
-        await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"Ticket_Cat": int(channel.id)}})
+        await guild_coll.update_one({"Guild": int(ctx.guild_id)}, {"$set": {"Ticket_Cat": channel.name}})
 
 
 def setup(bot):
