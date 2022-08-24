@@ -73,8 +73,8 @@ class TicketButton(discord.ui.View):
     @discord.ui.button(label="Normal", emoji="📩", style=discord.ButtonStyle.green, custom_id="Normal")
     async def norm_ticket(self, button: discord.ui.Button, interaction: discord.Interaction):
         await interaction.response.send_message(content="Creating Ticket", ephemeral=True)
-        guild = await guild_coll.find_one({"Guild": interaction.guild.id})
-        logs = self.bot.get_channel(guild['Ticket_Cat'])
+        #guild = await guild_coll.find_one({"Guild": interaction.guild.id})
+        #logs = self.bot.get_channel(guild['Ticket_Cat'])
         #guild_get = interaction.client.get_guild(guild)
         #ticket_cat = interaction.guild.get_channel(logs)
         ticket_channel = await interaction.guild.create_text_channel(
