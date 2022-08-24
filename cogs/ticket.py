@@ -120,7 +120,7 @@ class InnerTicketView(discord.ui.View):
             async for msg in interaction.channel.history(limit=None):
                 file.write(f"{msg.created_at} - {msg.author.display_name}:{msg.clean_content}\n")
         file = discord.File(fileName)
-        t_log = interaction.client.get_channel(logs)
+        t_log = self.bot.get_channel(logs)
         await t_log.send(content=f"Ticket Closed By {interaction.user.mention}", file=file)
 
 
