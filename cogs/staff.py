@@ -61,24 +61,17 @@ class Staff(commands.Cog):
     @commands.command()
     @commands.has_any_role("Cookie Queen", "Administrator Cookie", "Moderator Cookie")
     async def ban(self, ctx, member: discord.User, reason: str = "Breaking the rules", del_message_days: int = 0):
-        try:
-            whitelisted = ["Cookie Queen", "Administrator Cookie", "Moderator Cookie"]
+        # TODO: Probably add a check to make sure Moderators cannot ban admins or higher.
+        if member is None:
+            await ctx.channel.send("Please provide a user to ban!")
+            return
 
-            if ctx.author.top_role.name not in whitelisted:
-                if member is None:
-                    await ctx.channel.send("Please provide a user to ban!")
-                    return
-
-                await ctx.guild.ban(member,
-                                    reason=f"mod: {ctx.author} | reason: {reason[:400]}{'...' if len(reason) > 400 else ''}",
-                                    delete_message_days=del_message_days)
-                embed = discord.Embed(color=0xff0000)
-                embed.add_field(name='Banned ⚠️', value=f'{member} has been banned: `{reason}`')
-                await ctx.send(embed=embed)
-            else:
-                await ctx.channel.send("Ban failed - You can't ban someone with hightened permissions")
-        except commands.MissingRole:
-            await ctx.channel.send("Ban failed - You're missing permissions")
+        await ctx.guild.ban(member,
+            reason=f"mod: {ctx.author} | reason: {reason[:400]}{'...' if len(reason) > 400 else ''}",
+            delete_message_days=del_message_days)
+        embed = discord.Embed(color=0xff0000)
+        embed.add_field(name='Banned ⚠️', value=f'{member} has been banned: `{reason}`')
+        await ctx.send(embed=embed)
 
     @commands.slash_command()
     @discord.default_permissions(manage_roles=True)
